@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+	ViewData["Title"] = "All Products";
+}
+
+<h1>All Products</h1>
+<hr />
+@if ((await AuthorizationService.AuthorizeAsync(User, Permissions.Products.Edit)).Succeeded)
+{
+	<a href="#" class="btn btn-success" >Edit</a>
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, Permissions.Products.Create)).Succeeded)
+{
+	<a href="#" class="btn btn-primary">Create</a>
+}
+@if ((await AuthorizationService.AuthorizeAsync(User, Permissions.Products.Delete)).Succeeded)
+{
+	<a href="#" class="btn btn-danger">Delete</a>
+}
+
+
