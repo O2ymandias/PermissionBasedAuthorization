@@ -90,12 +90,13 @@ namespace UserManagementWithIdentity.Controllers
 			{
 				var result = await _roleManager.RemoveClaimAsync(role, roleClaim);
 				if (!result.Succeeded)
+				{
 					foreach (var error in result.Errors)
-					{
 						_logger.LogError("Error: {Description}", error.Description);
-						ModelState.AddModelError("", "Unexpected Error!");
-						return View(inputModel);
-					}
+
+					ModelState.AddModelError("", "Unexpected Error!");
+					return View(inputModel);
+				}
 			}
 
 			foreach (var selectedClaim in inputModel.Permissions.Where(p => p.IsSelected))
