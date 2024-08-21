@@ -75,9 +75,9 @@ namespace PermissionBasedAuthorization.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            if (model.Roles.Any(r => !r.IsSelected))
+            if (!model.Roles.Any(role => role.IsSelected))
             {
-                ModelState.AddModelError(nameof(CreateUserVM.Roles), "At Least 1 Role Must Be Selected!!");
+                ModelState.AddModelError(nameof(CreateUserVM.Roles), "At least 1 role must be assigned.");
                 return View(model);
             }
 
